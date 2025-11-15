@@ -14,4 +14,5 @@ public String storeInDB(String email, String password){
     System.out.println("Storing in database");
     return "Success";
 }
+public getUser(){};
 }
