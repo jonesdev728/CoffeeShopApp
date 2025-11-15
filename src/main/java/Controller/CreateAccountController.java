@@ -2,11 +2,13 @@ package Controller;
 
 import Database.DBMGR;
 
+import java.io.IOException;
+
 public class CreateAccountController {
     DBMGR dbmgr;
     private String email, password;
 
-    public CreateAccountController() {
+    public CreateAccountController() throws IOException {
         System.out.println("New DBMGR object created");
         DBMGR dbmgr = new DBMGR();
         this.dbmgr = dbmgr;

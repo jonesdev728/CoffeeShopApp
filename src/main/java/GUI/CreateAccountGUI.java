@@ -3,6 +3,7 @@ package GUI;
 import Controller.CreateAccountController;
 
 import javax.swing.*;
+import java.io.IOException;
 
 public class CreateAccountGUI {
     CreateAccountController cac;
@@ -11,7 +12,7 @@ public class CreateAccountGUI {
     //They click on the Create Account tab in from the main page
     //When they click this button, the CreateAccountGui is created
 
-    public CreateAccountGUI(){
+    public CreateAccountGUI() throws IOException {
         System.out.println("New CreateAccountController Created");
         CreateAccountController cac =
         new CreateAccountController();
