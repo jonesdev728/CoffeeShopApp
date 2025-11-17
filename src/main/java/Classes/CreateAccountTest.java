@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
   public class CreateAccountTest{
-public static void main(String[]args) throws IOException {
+public static void main(String[]args) throws Exception {
     Scanner scanner=new Scanner(System.in);
         //User goes to the CreateAccount GUI
         CreateAccountGUI cac=new CreateAccountGUI();
@@ -16,7 +16,7 @@ public static void main(String[]args) throws IOException {
 
     System.out.println("Enter password: ");
     String password = scanner.nextLine();
-    System.out.println(cac.onCreateAccountClicked(email, password));
+    System.out.println(cac.onCreateAccountClicked(password, email));
 
 
         }

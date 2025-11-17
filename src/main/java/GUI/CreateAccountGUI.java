@@ -29,7 +29,7 @@ public class CreateAccountGUI {
     //Once they do this, they click the button "Create"
     //This will call this function which passes on the info to the controller
 
-   public String onCreateAccountClicked(String email, String password){
+   public String onCreateAccountClicked(String password, String email) throws Exception {
        System.out.println("Passing to CreateAccountController with username and password");
        String message = cac.createAccount(email,password);
         return message;

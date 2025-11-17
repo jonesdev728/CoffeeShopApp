@@ -13,11 +13,12 @@ public class CreateAccountController {
         DBMGR dbmgr = new DBMGR();
         this.dbmgr = dbmgr;
     }
-    public String createAccount(String email, String password) {
+    public String createAccount(String password, String email) throws Exception {
         this.email = email;
         this.password = password;
         System.out.println("Calling db to see if user exists");
-        if (dbmgr.isFound(email) == true) {
+        if (dbmgr.emailExists(email)==false){//This means that the account has been made
+            System.out.println(dbmgr.emailExists(email));
             return "Account Already Created"; //If this happens, pass to LoginGUI
         } else
             return dbmgr.storeInDB(email, password);
