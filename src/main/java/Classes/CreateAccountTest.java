@@ -16,7 +16,14 @@ public static void main(String[]args) throws Exception {
 
     System.out.println("Enter password: ");
     String password = scanner.nextLine();
-    System.out.println(cac.onCreateAccountClicked(password, email));
+
+    System.out.println("Enter First Name: ");
+    String fName = scanner.nextLine();
+
+    System.out.println("Enter Last Name:");
+    String lName = scanner.nextLine();
+
+    System.out.println(cac.onCreateAccountClicked(password, email,fName,lName));
 
 
         }

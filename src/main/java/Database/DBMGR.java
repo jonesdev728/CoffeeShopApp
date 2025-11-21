@@ -35,10 +35,13 @@ public class DBMGR {
 
 public boolean emailExists(String email) throws Exception {
         if (db == null){
+            System.out.println(email);
             return false;}
-        else{
+        else
+        {
         String emailToSearch = email;
-        String collectionName = "Users";
+        System.out.println(email);
+        String collectionName = "Customers";
         String emailFieldName = "Email";
 
         CollectionReference usersRef = db.collection(collectionName);
@@ -46,29 +49,37 @@ public boolean emailExists(String email) throws Exception {
         Query query = usersRef.whereEqualTo(emailFieldName,emailToSearch);
         ApiFuture<QuerySnapshot> future = query.get();
 
+
+
         QuerySnapshot snapshot = future.get();
-        if (snapshot.size() ==0){
-            return false;//email not found. User can create account
+            System.out.println(snapshot.size());
+        if (snapshot.size() == 0){
+            System.out.println("Email Doesn't exist");
+            return true;//email not found. User can create account
     }
     System.out.println("User has an account already");
-    return true;//email found. User can log in
+    return false;//email found. User can log in
 
 }}
     public String getFirestoreTimestamp() {
         ZonedDateTime now = ZonedDateTime.now();
         return now.format(DateTimeFormatter.ISO_INSTANT);}
 
-    public String storeInDB(String password, String email) {
+    public String storeInDB(String password, String email,String fName, String lName) {
         if (db == null) {
             return ("Firestore instance not initialized. Call setFirestoreInstance() first.");
                   }
         else{
 
         Map<String, Object> userData = new HashMap<>();
-        userData.put("Password",password);
+
+        userData.put("FirstName",fName);
+        userData.put("LastName",lName);
         userData.put("Email", email);
+        userData.put("Password",password);
         userData.put("DateJoined", getFirestoreTimestamp()); // Add a timestamp
         userData.put("CustomerID", java.util.UUID.randomUUID().toString());
+        userData.put("Points", 0);
 
 
         try{
