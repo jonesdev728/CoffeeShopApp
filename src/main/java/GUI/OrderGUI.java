@@ -8,20 +8,22 @@ import Controller.OrderController;
 public class OrderGUI {
     OrderController oc;
     DrinkFactory df;
-     //on start up, the menu items get initialized
-    //it is from this class that the frontend will connect to grab info about each drink
 
     public OrderGUI() {
         OrderController oc = new OrderController();
         DrinkFactory df = new DrinkFactory();
-        //additional Drinks to be added later
+        this.oc = oc;
+        this.df= df;
     }
 
     //this shows coffees
-
-
     public String onAddToCart(String drink){
-        return oc.addToCart(df.createDrink(drink));
+        System.out.println("Sending a Drink object to OrderController from the OrderGui Class via the addToCartMethod");
+       return oc.addToCart(df.createDrink(drink));
+    }
 
+    public String onOrderCoffee(){
+        System.out.println("Calling the OrderController PlaceOrder Method from the OrderGui Class");
+        return oc.placeOrder();
     }
 }

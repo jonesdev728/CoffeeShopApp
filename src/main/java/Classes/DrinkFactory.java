@@ -6,16 +6,16 @@ public class DrinkFactory {
         private HashMap<String, Class> drinks = new HashMap();
         public DrinkFactory()
         {
-            drinks.put("Drip", DripCoffee.class);
+            drinks.put("Drip Coffee", DripCoffee.class);
             drinks.put("Latte", Latte.class);
-            //pizzas.put("veggie", CheesePizza.class);
+
         }
         public Drink createDrink(String type) {
             Drink d = null;
             try {
                 d = (Drink)drinks.get(type).getConstructor().newInstance();
             }
-            catch(Exception e){ System.out.println(e);}
+            catch(Exception e){ System.out.println(e +"I knew it");}
 
             return d;
         }
@@ -29,4 +29,4 @@ public class DrinkFactory {
         }
     }
 
-}
+

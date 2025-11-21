@@ -10,7 +10,7 @@ import java.util.Scanner;
   public class Test{
 public static void main(String[]args) throws Exception {
 
-    //Create Account Test//
+   /* //Create Account Test//
     Scanner scanner=new Scanner(System.in);
         //User goes to the CreateAccount GUI
         CreateAccountGUI cac=new CreateAccountGUI();
@@ -26,7 +26,8 @@ public static void main(String[]args) throws Exception {
     System.out.println("Enter Last Name:");
     String lName = scanner.nextLine();
 
-    System.out.println(cac.onCreateAccountClicked(password, email,fName,lName));
+    System.out.println(cac.onCreateAccountClicked(password, email,fName,lName));*/
+
 //////////////////////////////////////////////////////////////////////////////
 
     //Order a drink logic:
@@ -37,9 +38,13 @@ public static void main(String[]args) throws Exception {
 
     OrderGUI orderGUI = new OrderGUI();
 
-    System.out.println(orderGUI.Drink.drip);
     //click "add to cart"
-    orderGUI.onAddToCart(d);
+    orderGUI.onAddToCart("Drip Coffee");
+    orderGUI.onAddToCart("Latte");
+
+    //clicks on "Order Coffee" after Cart has been filled
+    orderGUI.onOrderCoffee();
+
 
 
 

@@ -8,13 +8,23 @@ import Classes.OrderQueue;
 public class OrderController {
     Cart c;
     Order o;
-    OrderQueue oq;
-    public OrderController(){
+
+    public OrderController() {
         Cart c = new Cart();
+        this.c = c;};
+
+    public String addToCart(Drink d) {
+
+        System.out.println("Drink object passed to Cart class from the OrderController class addToCart Method");
+        return c.addToCart(d);
     }
 
-    public String addToCart(Drink d){
-       return c.addToCart(d);
-
+    public String placeOrder() {
+        System.out.println("Order object created in memory");
+        Order o = new Order(c);
+        this.o = o;
+        System.out.println("Order object (which contains a Drink object) sent to addToQueue method from OrderController class");
+        return (o.addToQueue(o));
     }
+
 }
