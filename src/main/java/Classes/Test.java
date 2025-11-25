@@ -7,47 +7,78 @@ import GUI.OrderGUI;
 import java.io.IOException;
 import java.util.Scanner;
 
-  public class Test{
-public static void main(String[]args) throws Exception {
+  public class Test {
+      public static void main(String[] args) throws Exception {
+          Scanner scanner = new Scanner(System.in);
 
-   /* //Create Account Test//
-    Scanner scanner=new Scanner(System.in);
-        //User goes to the CreateAccount GUI
-        CreateAccountGUI cac=new CreateAccountGUI();
-    System.out.println("Enter email: ");
-    String email = scanner.nextLine();
+          int input = 0;
+          while (input != 10) {
+              System.out.println("Pick options: ");
+              System.out.println("Create Account (1)");
+              System.out.println("View Coffee Items (2)");
+              System.out.println("Exit = 10");
 
-    System.out.println("Enter password: ");
-    String password = scanner.nextLine();
+              input = Integer.parseInt(scanner.nextLine());
+              //Create Account Option
+              if (input == 1) {
+                  CreateAccountGUI cac = new CreateAccountGUI();
+                  System.out.println("Enter email: ");
+                  String email = scanner.nextLine();
 
-    System.out.println("Enter First Name: ");
-    String fName = scanner.nextLine();
+                  System.out.println("Enter password: ");
+                  String password = scanner.nextLine();
 
-    System.out.println("Enter Last Name:");
-    String lName = scanner.nextLine();
+                  System.out.println("Enter First Name: ");
+                  String fName = scanner.nextLine();
 
-    System.out.println(cac.onCreateAccountClicked(password, email,fName,lName));*/
+                  System.out.println("Enter Last Name:");
+                  String lName = scanner.nextLine();
 
-//////////////////////////////////////////////////////////////////////////////
+                  System.out.println(cac.onCreateAccountClicked(password, email, fName, lName));
 
-    //Order a drink logic:
-    //This will show a user clicking "Add to Cart" on a DripCoffee
-    //This will add the Drip Coffee to the cart
-    //After this, we assume the user will click "Submit Checkout" which will create an Order
-    //This order will be stored in the OrderQueue class
+              }
+              else if (input == 2) {
+                  int loops = 1;
+                  OrderGUI og = new OrderGUI();
+                  DrinkFactory df = new DrinkFactory();
 
-    OrderGUI orderGUI = new OrderGUI();
+                  while (loops <= 2) {
+                      System.out.println("Add Coffee To Cart: ");
+                      df.displayDrinks();
+                      input = scanner.nextInt();
 
-    //click "add to cart"
-    orderGUI.onAddToCart("Drip Coffee");
-    orderGUI.onAddToCart("Latte");
+                      if (input == 3) {
+                          System.out.println("What size? s,m,l");
+                          System.out.println("---");
+                          og.onAddToCart("Drip Coffee", 's');
+                          loops = loops + 1;
+                      } else if (input == 4) {
+                          System.out.println("What size? s,m,l");
+                          System.out.println("---");
+                          og.onAddToCart("Latte", 'm');
+                          loops = loops + 1;
+                      } else
+                          System.out.println("Invalid entry");
+                  }
+                  System.out.println("Would you like to order yes (1) no (2)?");
+                  int ans = scanner.nextInt();
+                  if(ans == 1){
+                      og.onOrderCoffee();
+                      System.out.println("Order Completed");
+                        //og.onOrderCompleted();
+                  }
+                  else
+                      System.out.println("You suck");
 
-    //clicks on "Order Coffee" after Cart has been filled
-    orderGUI.onOrderCoffee();
+                  }
+            else
+                  System.out.println("Invalid Entry");
+
+              }
+          }
+      }
 
 
 
 
-        }
 
-  }

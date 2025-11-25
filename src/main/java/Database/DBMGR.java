@@ -18,6 +18,7 @@ import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.ListenerRegistration;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -29,7 +30,6 @@ public class DBMGR {
 
     public DBMGR() throws IOException {
         FirestoreConnector fc = new FirestoreConnector();
-
         this.db = fc.getFirestoreInstance();
         }
 
@@ -37,20 +37,15 @@ public boolean emailExists(String email) throws Exception {
         if (db == null){
             System.out.println(email);
             return false;}
-        else
-        {
+        else {
+
         String emailToSearch = email;
         System.out.println(email);
         String collectionName = "Customers";
         String emailFieldName = "Email";
-
         CollectionReference usersRef = db.collection(collectionName);
-
         Query query = usersRef.whereEqualTo(emailFieldName,emailToSearch);
         ApiFuture<QuerySnapshot> future = query.get();
-
-
-
         QuerySnapshot snapshot = future.get();
             System.out.println(snapshot.size());
         if (snapshot.size() == 0){
@@ -60,19 +55,30 @@ public boolean emailExists(String email) throws Exception {
     System.out.println("User has an account already");
     return false;//email found. User can log in
 
-}}
+}
+    }
     public String getFirestoreTimestamp() {
         ZonedDateTime now = ZonedDateTime.now();
         return now.format(DateTimeFormatter.ISO_INSTANT);}
 
+   /* public String storeOrderInDB(ArrayList<String> items,String name){
+        if (db == null){
+            return ("Firestore instance not called");
+        }
+        else{
+            Map<String,Object> orderData = new HashMap<>();
+
+            orderData.put("Time",getFirestoreTimestamp());
+            orderData.put("Name", name);
+            orderData.put("Items", items);
+
+        }
+    }*/
     public String storeInDB(String password, String email,String fName, String lName) {
         if (db == null) {
-            return ("Firestore instance not initialized. Call setFirestoreInstance() first.");
-                  }
+            return ("Firestore instance not initialized. Call setFirestoreInstance() first.");}
         else{
-
         Map<String, Object> userData = new HashMap<>();
-
         userData.put("FirstName",fName);
         userData.put("LastName",lName);
         userData.put("Email", email);
@@ -81,21 +87,16 @@ public boolean emailExists(String email) throws Exception {
         userData.put("CustomerID", java.util.UUID.randomUUID().toString());
         userData.put("Points", 0);
 
-
         try{
             ApiFuture<DocumentReference> future = db.collection("Customers").add(userData);
-
             DocumentReference docRef = future.get();
             System.out.println("Doc written with id:"+ docRef.getId());
-
-
         } catch (Exception e) {
             e.printStackTrace();
             return "Error writing to Database" + e.getMessage();
+        }
+            return"success";
 
         }
-        // Add a new document with a generated ID
-return"success";
-    }
     }
 }

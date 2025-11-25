@@ -10,10 +10,15 @@ public class DrinkFactory {
             drinks.put("Latte", Latte.class);
 
         }
-        public Drink createDrink(String type) {
+        public void displayDrinks(){
+            int i = 3;
+            for(String s : drinks.keySet())
+                System.out.println(s +" "+ i++);
+        }
+        public Drink createDrink(String type,char size) {
             Drink d = null;
             try {
-                d = (Drink)drinks.get(type).getConstructor().newInstance();
+                d = (Drink)drinks.get(type).getConstructor(char.class).newInstance(size);
             }
             catch(Exception e){ System.out.println(e +"I knew it");}
 

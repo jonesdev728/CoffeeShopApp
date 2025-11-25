@@ -17,6 +17,18 @@ public class Cart {
         cart.add(d);
         return "Added to Cart";
     };
+    public void viewCart(){
+        double total = 0.0;
+        for (int i =0;i<cart.size(); i++){
+            System.out.println("+ "+cart.get(i).getName() + ", "+ cart.get(i).getSize()+ ", " + "$" +cart.get(i).getPrice()+" + ");
+            total = total + cart.get(i).getPrice();
+            System.out.println("+ ------------------ +");
+        }
+
+        System.out.println("+ ======="+ " $" +total + " +");
+        System.out.println("++++++++++++++++++++++");
+        System.out.println("");
+    }
 
     public String removeFromCart(Drink d){
         cart.remove(d);
