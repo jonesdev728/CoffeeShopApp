@@ -1,10 +1,7 @@
-package Classes;
+package Testing;
 
-import GUI.CreateAccountGUI;
 import GUI.OrderGUI;
 
-
-import java.io.IOException;
 import java.util.Scanner;
 
 public class Test2 {

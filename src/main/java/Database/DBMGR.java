@@ -1,9 +1,7 @@
 package Database;
-import com.google.auth.oauth2.GoogleCredentials;
+import Classes.Account;
+import Classes.Order;
 import com.google.cloud.firestore.*;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.FirebaseOptions;
-import com.google.firebase.cloud.FirestoreClient;
 import com.google.api.core.ApiFuture;
 
 import java.time.ZonedDateTime;
@@ -12,17 +10,11 @@ import java.time.format.DateTimeFormatter;
 import com.google.cloud.firestore.CollectionReference;
 import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.Query;
-import com.google.cloud.firestore.QueryDocumentSnapshot;
 import com.google.cloud.firestore.QuerySnapshot;
-import com.google.api.core.ApiFuture;
-import com.google.cloud.firestore.ListenerRegistration;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
-import java.util.concurrent.ExecutionException;
 
 
 public class DBMGR {
@@ -38,7 +30,6 @@ public boolean emailExists(String email) throws Exception {
             System.out.println(email);
             return false;}
         else {
-
         String emailToSearch = email;
         System.out.println(email);
         String collectionName = "Customers";
@@ -59,22 +50,35 @@ public boolean emailExists(String email) throws Exception {
     }
     public String getFirestoreTimestamp() {
         ZonedDateTime now = ZonedDateTime.now();
-        return now.format(DateTimeFormatter.ISO_INSTANT);}
+        return now.format(DateTimeFormatter.ISO_INSTANT);
+    }
 
-   /* public String storeOrderInDB(ArrayList<String> items,String name){
-        if (db == null){
+   public String storeOrderInDB(Order o){
+        if (db == null)
+        {
             return ("Firestore instance not called");
         }
         else{
             Map<String,Object> orderData = new HashMap<>();
+            orderData.put("Date",getFirestoreTimestamp());
+            orderData.put("Name", o.getName());
+            orderData.put("Items",o.getItems());
+           orderData.put("Price",o.getPrice());
+            try{
+                ApiFuture<DocumentReference> future = db.collection("OrderHistory").add(orderData);
+                DocumentReference docRef = future.get();
+                System.out.println("Doc written with id:"+ docRef.getId());
 
-            orderData.put("Time",getFirestoreTimestamp());
-            orderData.put("Name", name);
-            orderData.put("Items", items);
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.out.println("THats a problem");
+                return "Error writing Order to Database" + e.getMessage();
+            }
 
+        return "Order stored in memory";
         }
-    }*/
-    public String storeInDB(String password, String email,String fName, String lName) {
+    }
+    public String storeAccountInDB(String password, String email,String fName, String lName) {
         if (db == null) {
             return ("Firestore instance not initialized. Call setFirestoreInstance() first.");}
         else{
@@ -93,10 +97,52 @@ public boolean emailExists(String email) throws Exception {
             System.out.println("Doc written with id:"+ docRef.getId());
         } catch (Exception e) {
             e.printStackTrace();
-            return "Error writing to Database" + e.getMessage();
+            return "Error writing Account to Database" + e.getMessage();
         }
             return"success";
 
         }
     }
+
+    public String verifyUser(String email, String password) throws Exception {
+        if (db == null) {
+            return ("Firestore instance not initialized. Call setFirestoreInstance() first.");}
+        else{
+            if(!emailExists(email)) {//this means user has an email already registered
+                String collectionName = "Customers";
+                String passwordFieldName = "Password";
+                String emailFieldName = "Email";
+
+                ApiFuture<QuerySnapshot> future =
+                        db.collection(collectionName).whereEqualTo(emailFieldName, email).get();
+
+                QuerySnapshot snapshot = future.get();
+
+                DocumentSnapshot doc = snapshot.getDocuments().get(0);
+                String passwordInDatabase = doc.getString(passwordFieldName);
+
+                if (password.equals(passwordInDatabase)) {
+                    String accountEmail = doc.getString("Email");
+                    String fName = doc.getString("FirstName");
+                    String lName = doc.getString("LastName");
+                    double points = doc.getDouble("Points");
+                    //create Account object
+                    Account a = new Account(fName, lName, passwordInDatabase,points,accountEmail);
+                    System.out.println(a.toString());
+                    return "Correct Password";
+                } else {
+                    System.out.println("Incorrect");
+                    return "Incorrect Password. Try again!";
+                }
+            }
+            else {
+                return "User doesn't have an account. Create account?";
+            }
+        }
+
+
+
+}
+
+
 }

@@ -25,6 +25,6 @@ public class CreateAccountController {
             System.out.println(dbmgr.emailExists(email));
             return "Account Already Created"; //If this happens, pass to LoginGUI
         } else
-            return dbmgr.storeInDB(password,email, fName, lName);
+            return dbmgr.storeAccountInDB(password,email, fName, lName);
     }
 }

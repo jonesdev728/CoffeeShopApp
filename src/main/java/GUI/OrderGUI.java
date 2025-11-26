@@ -5,11 +5,13 @@ import Classes.DrinkFactory;
 import Classes.DripCoffee;
 import Controller.OrderController;
 
+import java.io.IOException;
+
 public class OrderGUI {
     OrderController oc;
     DrinkFactory df;
 
-    public OrderGUI() {
+    public OrderGUI() throws IOException {
         OrderController oc = new OrderController();
         DrinkFactory df = new DrinkFactory();
         this.oc = oc;

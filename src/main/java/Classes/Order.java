@@ -1,5 +1,8 @@
 package Classes;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Order {
     Cart c;
     String name;
@@ -9,6 +12,15 @@ public class Order {
     public Order(Cart c, String name) {
         this.c = c;
         this.name = name;
+    }
+    public String getName(){
+        return name;
+    }
+    public List<String> getItems(){
+        return c.getCart();
+    }
+    public double getPrice(){
+        return c.getCartPrice();
     }
     //When this method is called it will create an instance of the OrderQueue class (singleton)
     //it will add the order Object to the queue

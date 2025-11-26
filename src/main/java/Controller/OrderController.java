@@ -17,10 +17,10 @@ public class OrderController {
     DBMGR dbmgr;
     //When this class is instantiated, a new Cart will be created.
     //This makes sense because every person will call OrderController once and use it to add to cart and Order Cart
-    public OrderController(){ //throws IOException {
+    public OrderController() throws IOException { //throws IOException {
         Cart c = new Cart();
-       /* DBMGR dbmgr = new DBMGR();
-        this.dbmgr = dbmgr;*/
+        DBMGR dbmgr = new DBMGR();
+        this.dbmgr = dbmgr;
         this.c = c;};
 
     //This method takes in a Drink object and passes that drink to the Cart Class addToCart Method
@@ -42,8 +42,12 @@ public class OrderController {
         return (o.addToQueue(o));
     }
     public String orderHasBeenServed(){
-        //dbmgr.storeOrderInDB(o);
-        return(o.removeFromQueue(o));
+        if(o != null){
+            dbmgr.storeOrderInDB(o);
+            return(o.removeFromQueue(o));
+        }
+        else
+            return "Oops, order hasn't been placed";
 
     }
 
