@@ -19,12 +19,6 @@ public class CreateAccountGUI {
         this.cac = cac;
     }
 
-    //These text fields will be filled out with the needed info
-
-    JTextField emailField = new JTextField(20);
-    JPasswordField passwordField = new JPasswordField(20);
-    String email = emailField.getText();
-    String password = new String(passwordField.getPassword());
 
     //Once they do this, they click the button "Create"
     //This will call this function which passes on the info to the controller

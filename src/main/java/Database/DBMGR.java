@@ -64,6 +64,7 @@ public boolean emailExists(String email) throws Exception {
             orderData.put("Name", o.getName());
             orderData.put("Items",o.getItems());
            orderData.put("Price",o.getPrice());
+           orderData.put("Phone Number",o.getNumber());
             try{
                 ApiFuture<DocumentReference> future = db.collection("OrderHistory").add(orderData);
                 DocumentReference docRef = future.get();

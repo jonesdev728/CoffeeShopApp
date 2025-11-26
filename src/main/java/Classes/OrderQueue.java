@@ -32,4 +32,9 @@ public class OrderQueue {
         }
         return "Order has been removed from queue";
     }
+    public void viewQueue(Admin a){
+        for (Order i : queue){
+            System.out.println("Unless it is empty");
+            i.viewCart();}
+    }
 }

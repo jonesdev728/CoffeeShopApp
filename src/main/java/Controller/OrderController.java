@@ -28,6 +28,9 @@ public class OrderController {
         System.out.println("Drink object passed to Cart class from the OrderController class addToCart Method");
         return c.addToCart(d);
     }
+    public void viewCart(){
+        c.viewCart();
+    }
     //This method takes in the Cart object from above and adds a name and passes both to create an Order object
     //This order object contains a Cart Object +  String name for the order
     //It will pass this order to the Order addToQueue method
@@ -35,8 +38,10 @@ public class OrderController {
         System.out.println("Order object created in memory");
         System.out.println("What is your full name connected with this order?: ");
         String name = s.nextLine();
+        System.out.println("What is your phone number so we can text you?: ");
+        String number = s.nextLine();
         c.viewCart();
-        Order o = new Order(c, name);
+        Order o = new Order(c, name, number);
         this.o = o;
         System.out.println("Order object (which contains a Drink object) sent to addToQueue method from OrderController class");
         return (o.addToQueue(o));

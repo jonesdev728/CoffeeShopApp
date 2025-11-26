@@ -2,10 +2,10 @@ package Classes;
 
 public class DripCoffee implements Drink{
     //PULL THESE FROM DATABASE AFTER IMPLEMENTATION
-    String description;
-    String name;
-    double price;
-    char size;
+    public static String description;
+    public static String name;
+    public static double price;
+    public static char size;
 
     public DripCoffee(char size){
    this.description = "Plain ol' Black Coffee";
@@ -36,6 +36,10 @@ public class DripCoffee implements Drink{
 
     public double getPrice() {
         return price;
+    }
+
+    public void updatePrice(Admin a, double newPrice){
+        price = newPrice;
     }
 
 }
