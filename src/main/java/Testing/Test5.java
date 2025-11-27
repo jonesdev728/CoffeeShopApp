@@ -9,9 +9,10 @@ import GUI.LoginGUI;
 public class Test5 {
     public static void main(String[] args) throws Exception {
 
-      Admin a = new Admin();
+      LoginGUI lg = new LoginGUI();
+        System.out.println(lg.onLoginClicked("IAmTheAdmin","Admin"));
 
-      a.viewPreorderQueue(a);
+
 
 
 

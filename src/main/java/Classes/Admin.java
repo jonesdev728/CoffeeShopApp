@@ -9,9 +9,9 @@ import java.util.Scanner;
 
 public class Admin {
 
-        public void viewPreorderQueue(Admin a){
+        public void viewPreorderQueue(){
             OrderQueue oq = OrderQueue.getInstance();
-            oq.viewQueue(a);
+            oq.viewQueue();
         }
 
         //Update prices logic for another time

@@ -18,8 +18,6 @@ public class CreateAccountGUI {
         new CreateAccountController();
         this.cac = cac;
     }
-
-
     //Once they do this, they click the button "Create"
     //This will call this function which passes on the info to the controller
 

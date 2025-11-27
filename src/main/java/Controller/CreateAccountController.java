@@ -14,7 +14,6 @@ public class CreateAccountController {
         this.dbmgr = dbmgr;
     }
     public String createAccount(String password, String email, String fName, String lName) throws Exception {
-
         this.password = password;
         this.email = email;
         this.fName = fName;
