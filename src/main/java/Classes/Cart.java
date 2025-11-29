@@ -47,9 +47,9 @@ public class Cart {
         System.out.println();
     }
 
-    public String removeFromCart(Drink d){
+    /*public String removeFromCart(Drink d){
         cart.remove(d);
         return "Removed From Cart";
-    };
+    };*/
 
 }

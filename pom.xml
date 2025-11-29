@@ -13,6 +13,12 @@
         <maven.compiler.target>17</maven.compiler.target>
     </properties>
 
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.3.1</version>
+    </parent>
+
     <dependencies>
         <!-- Firebase Admin SDK -->
         <dependency>
@@ -21,6 +27,10 @@
             <version>9.3.0</version> <!-- you can upgrade later if needed -->
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
         <!-- Google Cloud Firestore Client -->
         <dependency>
             <groupId>com.google.cloud</groupId>
@@ -28,5 +38,6 @@
             <version>3.11.0</version>
         </dependency>
     </dependencies>
+
 
 </project>
